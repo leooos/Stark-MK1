@@ -1,5 +1,2 @@
 # Ignore a pasta node_modules
 node_modules
-
-# Ignore arquivos relacionados às chaves de API
-.\app\config\key.pem
