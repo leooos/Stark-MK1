@@ -1,10 +1,9 @@
 const { starkEnv } = require('../config/enviroment');
 const starkbank = require('starkbank');
+let project = new starkbank.Project(starkEnv);
+starkbank.user = project;
 
-function createInvoice(req, res){
-    let project = new starkbank.Project(starkEnv);
-    starkbank.user = project;
-    
+async function createInvoice(req, res){    
     const payload =[{
         amount: req.amount,
         descriptions: [
@@ -13,27 +12,14 @@ function createInvoice(req, res){
                 'value': 'MK1'
             }
         ],
-        /*discounts: [
-            {
-                'percentage': req.discountPercentage,
-                'due': req.discountPercentageDue
-            }
-        ],
-        due: req.due,
-        expiration: req.expiration,
-        'fine: payload.fine,
-        'interest: payload.interest,
-        */
         name: req.name,
         tags: [
-            'Service-MK1'
+            'Service-MK1',
+            'productionV1.0'
         ],
         taxId: req.taxId
     }];
-
-    (async() => {
-        let invoices = await starkbank.invoice.create(payload);
-    })();
+    const invoice = await starkbank.invoice.create(payload);
 };
 
 function getInvoices(req,res) {
