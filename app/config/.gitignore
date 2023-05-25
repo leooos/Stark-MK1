@@ -1,2 +1,2 @@
 # Ignore arquivos relacionados às chaves de API
-key
+/key.pem
